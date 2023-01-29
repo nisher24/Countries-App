@@ -1,0 +1,24 @@
+{
+  "name": "countries-app",
+  "version": "1.0.0",
+  "description": "Project for CS361: Software Engineering I at OSU",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nisher24/Countries-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nisher24/Countries-App/issues"
+  },
+  "homepage": "https://github.com/nisher24/Countries-App#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3",
+    "express": "^4.18.2"
+  }
+}
