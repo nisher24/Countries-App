@@ -37,14 +37,41 @@
                         <label for="search-country-input">Examples: Germany, Italy, France</label>
                         <input type="text" required="required" class="form-control" id="search-country-input" name="search-country-input" placeholder="Enter name">
                     </div>
+                    <!-- error message -->
+                    <div id="search-country-error-msg"></div>
                     <!-- submit button -->
-                    <button type="button" class="btn btn-secondary btn-lg btn-block mt-5" id="search-country-button">Go</button>
+                    <button type="button" class="btn btn-secondary btn-lg btn-block mt-4" id="search-country-button">Go</button>
                     <!-- link to details page -->
                     <div class="mt-3">
                         <a href="./details.html" class="link-primary mt-3">Search detailed information</a>
                     </div>
                 </form>
             </div>
+        </div>
+        <div class="row my-5 justify-content-md-center">
+          <!-- List countries -->
+          <div class="col-md-6 pl-5">
+              <h3>List countries</h3>
+              <!-- List countries form -->
+              <form class="border px-5 py-4" id="list-countries-form">
+                  <h5>List names of all countries or by region</h5>
+                  <!-- list countries input -->
+                  <div class="form-group">
+                      <label for="list-countries-input">Examples: Europe, Asia</label>
+                      <input type="text" required="required" class="form-control" id="list-countries-input" name="list-countries-input" placeholder="Enter region (default: all)">
+                      <label for="list-countries-input">Please note: you need to enter region name before click "Go" if you want to list by region</label>
+                  </div>
+                  <!-- error message -->
+                  <div id="list-countries-error-msg"></div>
+                  <!-- submit button -->
+                  <button type="button" class="btn btn-secondary btn-lg btn-block mt-2" id="list-countries-button">Go</button>
+                  <!-- Instruction popover -->
+                  <a tabindex="0" class="btn btn-link" data-container="body" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="Click 'Go' ->
+                    List all countries. Or Enter region name -> Click 'Go' -> List by region">
+                    Show how to list
+                  </a>
+              </form>
+          </div>
         </div>
     </div>
     <!-- Country basic info modal -->

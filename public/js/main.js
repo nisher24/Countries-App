@@ -12,7 +12,7 @@ function displayCountryInfo() {
     .then(function (response) {
       // Get the response JSON data
       let countryData = response.data;
-      console.log(countryData);
+      //console.log(countryData);
 
       // Update the modal content with JSON data
       let countryInfoList = document.querySelector('#country-info-list');
@@ -67,7 +67,10 @@ function displayCountryInfo() {
       $('#country-basic-info-modal').modal('show');
     })
     .catch(function (error) {
-      console.error(error);
+      //console.error(error);
+      let errorMessage = error.response.data.message || 'An error occurred';
+    $('#search-country-error-msg').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> ' + errorMessage 
+      + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
     });
 }
 
@@ -78,3 +81,41 @@ searchCountryButton.addEventListener('click', displayCountryInfo);
 $("#country-basic-info-modal").on("hidden.bs.modal", function () {
   $("#country-info-list").empty();
 });
+
+/* List countries form */
+// Get the input element and submit button
+const listCountriesInput = document.querySelector('#list-countries-input');
+const listCountriesButton = document.querySelector('#list-countries-button');
+
+function listCountries() {
+  // Get the value of the input element
+  const listCountriesValue = listCountriesInput.value;
+  console.log("VALUE: " + listCountriesValue);
+
+  if (listCountriesValue != "" && listCountriesValue.toLowerCase() != "all") {
+    axios.get(`https://restcountries.com/v3.1/region/${listCountriesValue}`)
+      .then(function (response) {
+        // Get the response JSON data
+        let countryList = response.data;
+        console.log(countryList);
+      })
+      .catch(function (error) {
+        //console.error(error);
+        let errorMessage = error.response.data.message || 'An error occurred';
+        $('#list-countries-error-msg').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> ' + errorMessage 
+          + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+      });   
+  }
+}
+
+// Add a click event listener to the list countries button
+listCountriesButton.addEventListener('click', listCountries);
+
+/* Initialize popovers */
+$(document).ready(function() {
+  $('[data-toggle="popover"]').popover();
+});
+
+$('.popover-dismiss').popover({
+  trigger: 'focus'
+})
