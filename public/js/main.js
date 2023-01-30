@@ -87,7 +87,7 @@ $("#country-basic-info-modal").on("hidden.bs.modal", function () {
 const listCountriesInput = document.querySelector('#list-countries-input');
 const listCountriesButton = document.querySelector('#list-countries-button');
 
-function listCountries() {
+function listCountriesByRegion() {
   // Get the value of the input element
   const listCountriesValue = listCountriesInput.value;
   //console.log("VALUE: " + listCountriesValue);
@@ -122,11 +122,46 @@ function listCountries() {
         $('#list-countries-error-msg').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> ' + errorMessage 
           + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
       });   
+  } else {
+    // Show confirm dialog
+    $('#country-list-confirm-dialog').modal('show');
   }
 }
 
+function listAllcountries() {
+  axios.get(`https://restcountries.com/v3.1/all`)
+  .then(function (response) {
+    // Get the response JSON data
+    let countryListData = response.data;
+    //console.log(countryListData);
+
+    // Update the modal content with JSON data
+    let countryList = document.querySelector('#country-list');
+
+    // Add title
+    let allCountriesTitle = document.querySelector('#country-list-modal-title');
+    allCountriesTitle.innerHTML = "All the countries in the world";
+
+    for (let i = 0; i < countryListData.length; i++) {
+      let country = document.createElement('li');
+      country.classList.add('list-group-item');
+      country.innerHTML = countryListData[i].name.common;
+      countryList.appendChild(country);
+    }
+
+    // Show modal
+    $('#country-list-modal').modal('show');
+  })
+  .catch(function (error) {
+    //console.error(error);
+    let errorMessage = error.response.data.message || 'An error occurred';
+    $('#list-countries-error-msg').html('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Error:</strong> ' + errorMessage 
+      + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+  });  
+}
+
 // Add a click event listener to the list countries button
-listCountriesButton.addEventListener('click', listCountries);
+listCountriesButton.addEventListener('click', listCountriesByRegion);
 
 // Clear country list modal content when close it
 $("#country-list-modal").on("hidden.bs.modal", function () {
