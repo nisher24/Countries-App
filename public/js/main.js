@@ -90,14 +90,31 @@ const listCountriesButton = document.querySelector('#list-countries-button');
 function listCountries() {
   // Get the value of the input element
   const listCountriesValue = listCountriesInput.value;
-  console.log("VALUE: " + listCountriesValue);
+  //console.log("VALUE: " + listCountriesValue);
 
   if (listCountriesValue != "" && listCountriesValue.toLowerCase() != "all") {
     axios.get(`https://restcountries.com/v3.1/region/${listCountriesValue}`)
       .then(function (response) {
         // Get the response JSON data
-        let countryList = response.data;
-        console.log(countryList);
+        let countryListData = response.data;
+        //console.log(countryListData);
+
+        // Update the modal content with JSON data
+        let countryList = document.querySelector('#country-list');
+
+        // Add region name
+        let regionName = document.querySelector('#country-list-modal-title');
+        regionName.innerHTML = listCountriesValue.toUpperCase();
+
+        for (let i = 0; i < countryListData.length; i++) {
+          let country = document.createElement('li');
+          country.classList.add('list-group-item');
+          country.innerHTML = countryListData[i].name.common;
+          countryList.appendChild(country);
+        }
+
+        // Show modal
+        $('#country-list-modal').modal('show');
       })
       .catch(function (error) {
         //console.error(error);
@@ -110,6 +127,11 @@ function listCountries() {
 
 // Add a click event listener to the list countries button
 listCountriesButton.addEventListener('click', listCountries);
+
+// Clear country list modal content when close it
+$("#country-list-modal").on("hidden.bs.modal", function () {
+  $("#country-list").empty();
+});
 
 /* Initialize popovers */
 $(document).ready(function() {

@@ -54,10 +54,10 @@
               <h3>List countries</h3>
               <!-- List countries form -->
               <form class="border px-5 py-4" id="list-countries-form">
-                  <h5>List names of all countries or by region</h5>
+                  <h5>List all countries or by region</h5>
                   <!-- list countries input -->
                   <div class="form-group">
-                      <label for="list-countries-input">Examples: Europe, Asia</label>
+                      <label for="list-countries-input">Examples: South America, Western Europe, Eastern Asia</label>
                       <input type="text" required="required" class="form-control" id="list-countries-input" name="list-countries-input" placeholder="Enter region (default: all)">
                       <label for="list-countries-input">Please note: you need to enter region name before click "Go" if you want to list by region</label>
                   </div>
@@ -85,8 +85,26 @@
             </button>
           </div>
           <div class="modal-body">
-            <ul class="list-group list-group-flush" id="country-info-list">
-            </ul>
+            <ul class="list-group list-group-flush" id="country-info-list"></ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Country list modal -->
+    <div class="modal fade" id="country-list-modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="country-list-modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group list-group-flush" id="country-list"></ul>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
